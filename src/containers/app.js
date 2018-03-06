@@ -1,8 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
 
+import "../../styles/index.scss";
+
 const App = () => {
-  return <div>Hello world</div>;
+  return <div />;
 };
 
 render(<App />, document.getElementById("react-entry"));
