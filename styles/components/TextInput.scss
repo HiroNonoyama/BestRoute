@@ -1,0 +1,26 @@
+.label {
+  color: white;
+  font-weight: 400;
+  font-size: 18px;
+  width: 100px;
+  display: block;
+  float: left;
+  text-align: center;
+}
+
+.input {
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-bottom-color: white;
+  background-color: transparent;
+  color: white;
+  outline-width: 0;
+  height: 30px;
+  font-size: 20px;
+  padding-left: 10px;
+  font-weight: lighter;
+  width: 300px;
+  &::-webkit-input-placeholder {
+    color: #0799f4;
+  }
+}

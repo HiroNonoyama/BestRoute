@@ -1,14 +1,21 @@
 body {
   margin: 0;
   padding: 0;
+  background: linear-gradient(90deg, #0a73ea, #0799f4, #01c3fc);
 }
 
 header {
   height: 60px;
   width: 100%;
-  background-color: blue;
+  padding-top: 40px;
+  padding-left: 80px;
   position: fixed;
   top: 0;
+}
+
+header > h1 {
+  margin: 0;
+  color: white;
 }
 
 #react-entry {
@@ -18,15 +25,12 @@ header {
 footer {
   height: 30px;
   width: 100%;
-  background-color: black;
   bottom: 0;
+  padding-left: 30px;
+  padding-bottom: 5px;
   position: fixed;
 }
 
 small {
   color: white;
-}
-
-#title {
-  margin: 0;
 }
