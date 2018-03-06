@@ -9,5 +9,12 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "watch": "parcel watch index.html"
+  },
+  "devDependencies": {
+    "node-sass": "^4.7.2"
   }
 }
