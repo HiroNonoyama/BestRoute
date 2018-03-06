@@ -1,0 +1,9 @@
+{
+  "name": "besway",
+  "version": "0.0.1",
+  "description": "Find best route",
+  "main": "index.js",
+  "repository": "github.com/hirononoyama/besway",
+  "author": "Hiro Nonoyama",
+  "license": "MIT"
+}
