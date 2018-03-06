@@ -14,7 +14,7 @@
   "scripts": {
     "start": "npx parcel index.html",
     "watch": "npx parcel watch index.html",
-    "build": "npx parcel build index.html"
+    "build": "npx parcel build index.html --out-dir ./build"
   },
   "devDependencies": {
     "autoprefixer": "^8.1.0",

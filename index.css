@@ -34,3 +34,9 @@ footer {
 small {
   color: white;
 }
+
+img {
+  height: 42px;
+  width: 42px;
+  float: left;
+}
