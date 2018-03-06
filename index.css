@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  height: 60px;
+  width: 100%;
+  background-color: blue;
+  position: fixed;
+  top: 0;
+}
+
+#react-entry {
+  margin-top: 60px;
+}
+
+footer {
+  height: 30px;
+  width: 100%;
+  background-color: black;
+  bottom: 0;
+  position: fixed;
+}
+
+small {
+  color: white;
+}
+
+#title {
+  margin: 0;
+}
