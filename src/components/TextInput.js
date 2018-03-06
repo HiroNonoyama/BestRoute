@@ -10,7 +10,7 @@ const TextInput = ({ label, placeholder }) => {
       </label>
       <input
         className={styles.input}
-        id={`textInput-{label}`}
+        id={`textInput-${label}`}
         placeholder={placeholder}
       />
     </Fragment>

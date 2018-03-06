@@ -8,46 +8,62 @@
   width: 100%;
 }
 
+.fadein {
+  animation-name: fadeIn;
+  animation-duration: 0.8s;
+}
+
+.fadeout {
+  animation-name: fadeOut;
+  animation-duration: 0.3s;
+}
+
 .addButton {
-  height: 40px;
-  width: 40px;
   display: inline-block;
-  border-radius: 20px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: white;
-  text-align: center;
-  line-height: 40px;
-  font-size: 20px;
-  color: white;
   z-index: 100;
   position: relative;
+  color: white;
   left: 30px;
   &:hover {
     cursor: pointer;
-    color: #0799f4;
-    background-color: white;
+    color: #0a73ea;
   }
 }
 
 .removeButton {
-  height: 20px;
-  width: 20px;
-  display: block;
-  float: left;
-  border-radius: 10px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: white;
-  text-align: center;
-  line-height: 20px;
-  font-size: 10px;
-  color: white;
   z-index: 100;
   position: absolute;
+  color: rgba(255, 255, 255, 0.3);
+  display: block;
+  float: left;
   &:hover {
     cursor: pointer;
-    color: #0799f4;
-    background-color: white;
+    color: white;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    position: relative;
+    top: -50px;
+    opacity: 0;
+  }
+  100% {
+    position: relative;
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    position: relative;
+    top: 0px;
+    opacity: 1;
+  }
+  100% {
+    position: relative;
+    top: -50px;
+    opacity: 0;
   }
 }
