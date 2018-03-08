@@ -1,5 +1,6 @@
 .container {
   width: 50%;
+  float: left;
 }
 
 .wrap {
@@ -65,5 +66,29 @@
     position: relative;
     top: -50px;
     opacity: 0;
+  }
+}
+
+.searchButtonWrap {
+  width: 100%;
+  margin-top: 100px;
+  padding-left: 250px;
+}
+
+.searchButton {
+  width: 80px;
+  height: 40px;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #0a73ea;
+  font-size: 20px;
+  outline: none;
+  &:hover {
+    background-color: transparent;
+    border-width: 3px;
+    border-style: solid;
+    border-color: white;
+    color: white;
   }
 }

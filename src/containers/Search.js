@@ -12,11 +12,48 @@ class Search extends React.PureComponent {
       form: ["Tokyo tower"],
     };
     this._handleAddButton = this._handleAddButton.bind(this);
+    this._searchDirection = this._searchDirection.bind(this);
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.directionsService = new google.maps.DirectionsService();
+      this.directionsDisplay = new google.maps.DirectionsRenderer();
+      this.map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 6,
+        center: { lat: 41.85, lng: -87.65 },
+      });
+
+      this.directionsDisplay.setMap(this.map);
+    }, 1000);
+    global._searchDirection = this._searchDirection;
   }
 
   _handleAddButton() {
     const { form } = this.state;
     this.setState({ form: [...form, ""] });
+  }
+
+  _searchDirection() {
+    const request = {
+      origin: "Chicago, IL",
+      destination: "Los Angeles, CA",
+      waypoints: [
+        {
+          location: "Joplin, MO",
+        },
+        {
+          location: "Oklahoma City, OK",
+        },
+      ],
+      provideRouteAlternatives: false,
+      travelMode: "DRIVING",
+      optimizeWaypoints: true,
+    };
+
+    this.directionsService.route(request, (result, status) => {
+      if (status === "OK") this.directionsDisplay.setDirections(result);
+    });
   }
 
   _handleRemoveButton(index, random) {
@@ -71,6 +108,14 @@ class Search extends React.PureComponent {
           <TextInputWithAutoComplete
             placeholder="Yokohama station"
             label="GOAL"
+          />
+        </div>
+        <div className={styles.searchButtonWrap}>
+          <input
+            className={styles.searchButton}
+            type="button"
+            value="検索"
+            onClick={this._searchDirection}
           />
         </div>
       </div>

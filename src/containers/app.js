@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 
 import Search from "./Search";
+import Map from "./Map";
 import styles from "../../styles/containers/app.scss";
 import { API_KEY } from "../constants";
 
@@ -9,6 +10,7 @@ const App = () => {
   return (
     <div className={styles.wrapper}>
       <Search />
+      <Map />
     </div>
   );
 };
