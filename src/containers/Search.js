@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import FontAwesome from "react-fontawesome";
 
-import TextInput from "../components/TextInput";
+import TextInputWithAutoComplete from "../components/TextInput";
 import styles from "../../styles/containers/Search.scss";
 
 class Search extends React.PureComponent {
@@ -37,16 +37,16 @@ class Search extends React.PureComponent {
     return (
       <div className={styles.container}>
         <div className={classNames(styles.wrap, styles.fadein)}>
-          <TextInput placeholder="Tokyo station" label="START" />
+          <TextInputWithAutoComplete
+            placeholder="Tokyo station"
+            label="START"
+            ref="START"
+          />
         </div>
         {form.map((placeholder, index) => {
           const random = Math.random();
           return (
-            <div
-              className={classNames(styles.wrap, styles.fadein)}
-              key={index}
-              data-index={random}
-            >
+            <div className={classNames(styles.wrap, styles.fadein)} key={index}>
               {form.length > 1 && (
                 <a
                   className={styles.removeButton}
@@ -55,7 +55,10 @@ class Search extends React.PureComponent {
                   <FontAwesome name="times-circle" size="2x" />
                 </a>
               )}
-              <TextInput placeholder={placeholder} label={`VIA${index + 1}`} />
+              <TextInputWithAutoComplete
+                placeholder={placeholder}
+                label={`VIA${index + 1}`}
+              />
               {index === form.length - 1 && (
                 <a className={styles.addButton} onClick={this._handleAddButton}>
                   <FontAwesome name="plus-circle" size="3x" />
@@ -65,7 +68,10 @@ class Search extends React.PureComponent {
           );
         })}
         <div className={classNames(styles.wrap, styles.fadein)}>
-          <TextInput placeholder="Yokohama station" label="GOAL" />
+          <TextInputWithAutoComplete
+            placeholder="Yokohama station"
+            label="GOAL"
+          />
         </div>
       </div>
     );
