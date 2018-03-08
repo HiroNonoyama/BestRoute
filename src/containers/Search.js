@@ -35,17 +35,17 @@ class Search extends React.PureComponent {
   }
 
   _searchDirection() {
+    const { form } = this.state;
+    const start = document.getElementById("textInput-START").value;
+    const goal = document.getElementById("textInput-GOAL").value;
+    const waypoints = form.map((_, index) => ({
+      location: document.getElementById(`textInput-VIA${index + 1}`).value,
+    }));
+
     const request = {
-      origin: "Chicago, IL",
-      destination: "Los Angeles, CA",
-      waypoints: [
-        {
-          location: "Joplin, MO",
-        },
-        {
-          location: "Oklahoma City, OK",
-        },
-      ],
+      origin: start,
+      destination: goal,
+      waypoints,
       provideRouteAlternatives: false,
       travelMode: "DRIVING",
       optimizeWaypoints: true,
