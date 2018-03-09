@@ -83,7 +83,11 @@ class Search extends React.PureComponent {
         {form.map((placeholder, index) => {
           const random = Math.random();
           return (
-            <div className={classNames(styles.wrap, styles.fadein)} key={index}>
+            <div
+              className={classNames(styles.wrap, styles.fadein)}
+              key={index}
+              data-index={random}
+            >
               {form.length > 1 && (
                 <a
                   className={styles.removeButton}
