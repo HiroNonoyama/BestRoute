@@ -1,5 +1,5 @@
 .container {
-  width: 50%;
+  width: 30%;
   float: left;
 }
 
@@ -21,7 +21,6 @@
 
 .addButton {
   display: inline-block;
-  z-index: 100;
   position: relative;
   color: white;
   left: 30px;
@@ -32,8 +31,8 @@
 }
 
 .removeButton {
-  z-index: 100;
   position: absolute;
+  margin-top: -10px;
   color: rgba(255, 255, 255, 0.3);
   display: block;
   float: left;
