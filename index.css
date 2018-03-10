@@ -5,6 +5,7 @@ body {
 }
 
 header {
+  background: linear-gradient(90deg, #0a73ea, #0799f4, #01c3fc);
   height: 60px;
   width: 100%;
   padding-top: 40px;

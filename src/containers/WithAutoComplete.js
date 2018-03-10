@@ -17,7 +17,6 @@ const WithAutoComplete = Component =>
       const input = new google.maps.places.Autocomplete(
         document.querySelector(`input[data-input="${id}"]`)
       );
-      // input.getBounds();
     }
 
     render() {
@@ -25,7 +24,7 @@ const WithAutoComplete = Component =>
       return (
         <Fragment>
           <Component
-            autoComplete={debounce(value => this._autoComplete(value), 300)}
+            autoComplete={debounce(value => this._autoComplete(value), 1000)}
             randomId={id}
             {...this.props}
           />

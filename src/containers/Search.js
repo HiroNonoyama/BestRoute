@@ -107,7 +107,7 @@ class Search extends React.PureComponent {
               />
               {index === form.length - 1 && (
                 <a className={styles.addButton} onClick={this._handleAddButton}>
-                  <FontAwesome name="plus-circle" size="3x" />
+                  <FontAwesome name="plus-circle" size="2x" />
                 </a>
               )}
             </div>
