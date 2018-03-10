@@ -9,10 +9,8 @@ class Search extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      form: ["Tokyo tower"],
+      form: [{ placeholder: "Tokyo tower", value: "" }],
     };
-    this._handleAddButton = this._handleAddButton.bind(this);
-    this._searchDirection = this._searchDirection.bind(this);
   }
 
   componentDidMount() {
@@ -20,21 +18,20 @@ class Search extends React.PureComponent {
       this.directionsService = new google.maps.DirectionsService();
       this.directionsDisplay = new google.maps.DirectionsRenderer();
       this.map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 6,
-        center: { lat: 41.85, lng: -87.65 },
+        zoom: 10,
+        center: { lat: 35.65, lng: 139.83 },
       });
 
       this.directionsDisplay.setMap(this.map);
     }, 1000);
-    global._searchDirection = this._searchDirection;
   }
 
-  _handleAddButton() {
+  _handleAddButton = () => {
     const { form } = this.state;
     this.setState({ form: [...form, ""] });
-  }
+  };
 
-  _searchDirection() {
+  _searchDirection = () => {
     const { form } = this.state;
     const origin = document.getElementById("textInput-START").value;
     const destination = document.getElementById("textInput-GOAL").value;
@@ -59,7 +56,7 @@ class Search extends React.PureComponent {
     this.directionsService.route(request, (result, status) => {
       if (status === "OK") this.directionsDisplay.setDirections(result);
     });
-  }
+  };
 
   _handleRemoveButton(index, random) {
     const { form } = this.state;
@@ -71,6 +68,13 @@ class Search extends React.PureComponent {
     setTimeout(() => {
       this.setState({ form: nextForm });
     }, 300);
+  }
+
+  _handleInput(value, index) {
+    const { form } = this.state;
+    const targetForm = { ...form[index], value };
+    const nextForm = form.map((v, i) => (index === i ? targetForm : v));
+    this.setState({ form: nextForm });
   }
 
   render() {
@@ -85,7 +89,7 @@ class Search extends React.PureComponent {
             ref="START"
           />
         </div>
-        {form.map((placeholder, index) => {
+        {form.map(({ placeholder, value }, index) => {
           const random = Math.random();
           return (
             <div
@@ -104,6 +108,8 @@ class Search extends React.PureComponent {
               <TextInputWithAutoComplete
                 placeholder={placeholder}
                 label={`VIA${index + 1}`}
+                value={value}
+                handleInput={e => this._handleInput(e, index)}
               />
               {index === form.length - 1 && (
                 <a className={styles.addButton} onClick={this._handleAddButton}>

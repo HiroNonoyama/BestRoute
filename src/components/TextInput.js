@@ -3,7 +3,14 @@ import React, { Fragment } from "react";
 import styles from "../../styles/components/TextInput.scss";
 import WithAutoComplete from "../containers/WithAutoComplete";
 
-const TextInput = ({ label, placeholder, randomId, autoComplete }) => {
+const TextInput = ({
+  label,
+  value,
+  placeholder,
+  randomId,
+  autoComplete,
+  handleInput,
+}) => {
   return (
     <Fragment>
       <label className={styles.label} htmlFor={`textInput-{label}`}>
@@ -13,8 +20,12 @@ const TextInput = ({ label, placeholder, randomId, autoComplete }) => {
         className={styles.input}
         id={`textInput-${label}`}
         placeholder={placeholder}
-        onChange={e => autoComplete(e.target.value)}
+        onChange={e => {
+          handleInput(e.target.value);
+          autoComplete(e.target.value);
+        }}
         data-input={randomId}
+        value={value}
       />
     </Fragment>
   );
