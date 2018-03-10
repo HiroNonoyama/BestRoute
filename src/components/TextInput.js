@@ -21,7 +21,7 @@ const TextInput = ({
         id={`textInput-${label}`}
         placeholder={placeholder}
         onChange={e => {
-          handleInput(e.target.value);
+          handleInput({ value: e.target.value, formattedAddress: "" });
           autoComplete(e.target.value);
         }}
         data-input={randomId}

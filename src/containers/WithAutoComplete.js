@@ -17,6 +17,13 @@ const WithAutoComplete = Component =>
       const input = new google.maps.places.Autocomplete(
         document.querySelector(`input[data-input="${id}"]`)
       );
+      input.addListener("place_changed", () => {
+        const place = input.getPlace();
+        this.props.handleInput({
+          value: place.name,
+          formattedAddress: place.formatted_address,
+        });
+      });
     }
 
     render() {

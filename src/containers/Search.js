@@ -9,7 +9,17 @@ class Search extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      form: [{ placeholder: "Tokyo tower", value: "" }],
+      form: [{ placeholder: "Tokyo tower", value: "", formattedAddress: "" }],
+      firstForm: {
+        placeholder: "Tokyo station",
+        value: "",
+        formattedAddress: "",
+      },
+      lastForm: {
+        placeholder: "Yokohama station",
+        value: "",
+        formattedAddress: "",
+      },
     };
   }
 
@@ -17,7 +27,8 @@ class Search extends React.PureComponent {
     setTimeout(() => {
       this.directionsService = new google.maps.DirectionsService();
       this.directionsDisplay = new google.maps.DirectionsRenderer();
-      this.map = new google.maps.Map(document.getElementById("map"), {
+      const mapEntryPoint = document.getElementById("map");
+      this.map = new google.maps.Map(mapEntryPoint, {
         zoom: 10,
         center: { lat: 35.65, lng: 139.83 },
       });
@@ -28,21 +39,25 @@ class Search extends React.PureComponent {
 
   _handleAddButton = () => {
     const { form } = this.state;
-    this.setState({ form: [...form, ""] });
+    this.setState({
+      form: [...form, { placeholder: "", value: "", formattedAddress: "" }],
+    });
   };
 
-  _searchDirection = () => {
-    const { form } = this.state;
-    const origin = document.getElementById("textInput-START").value;
-    const destination = document.getElementById("textInput-GOAL").value;
+  _searchDirection() {
+    const { form, firstForm, lastForm } = this.state;
     const waypoints = form
-      .filter(
-        (_, index) =>
-          document.getElementById(`textInput-VIA${index + 1}`).value !== ""
-      )
-      .map((_, index) => ({
-        location: document.getElementById(`textInput-VIA${index + 1}`).value,
+      .filter(({ value }) => value !== "")
+      .map(({ value, formattedAddress }) => ({
+        location: formattedAddress ? formattedAddress : value,
       }));
+
+    const origin = firstForm.formattedAddress
+      ? firstForm.formattedAddress
+      : firstForm.value;
+    const destination = lastForm.formattedAddress
+      ? lastForm.formattedAddress
+      : lastForm.value;
 
     const request = {
       origin,
@@ -54,8 +69,16 @@ class Search extends React.PureComponent {
     };
 
     this.directionsService.route(request, (result, status) => {
-      if (status === "OK") this.directionsDisplay.setDirections(result);
+      if (status === "OK") {
+        this.directionsDisplay.setDirections(result);
+      } else {
+        // TODO: error handling
+      }
     });
+  }
+
+  _handleSearchPress = () => {
+    this._searchDirection();
   };
 
   _handleRemoveButton(index, random) {
@@ -70,23 +93,34 @@ class Search extends React.PureComponent {
     }, 300);
   }
 
-  _handleInput(value, index) {
-    const { form } = this.state;
-    const targetForm = { ...form[index], value };
-    const nextForm = form.map((v, i) => (index === i ? targetForm : v));
-    this.setState({ form: nextForm });
+  _handleInput(value, formattedAddress = "", index) {
+    if (index >= 0) {
+      const { form } = this.state;
+      const targetForm = { ...form[index], value, formattedAddress };
+      const nextForm = form.map((v, i) => (index === i ? targetForm : v));
+      this.setState({ form: nextForm });
+    } else if (index === -1) {
+      this.setState({
+        firstForm: { placeholder: "", value, formattedAddress },
+      });
+    } else if (index === -2) {
+      this.setState({ lastForm: { placeholder: "", value, formattedAddress } });
+    }
   }
 
   render() {
-    const { form } = this.state;
+    const { firstForm, form, lastForm } = this.state;
 
     return (
       <div className={styles.container}>
         <div className={classNames(styles.wrap, styles.fadein)}>
           <TextInputWithAutoComplete
-            placeholder="Tokyo station"
+            placeholder={firstForm.placeholder}
             label="START"
-            ref="START"
+            value={firstForm.value}
+            handleInput={e =>
+              this._handleInput(e.value, e.formattedAddress, -1)
+            }
           />
         </div>
         {form.map(({ placeholder, value }, index) => {
@@ -109,7 +143,9 @@ class Search extends React.PureComponent {
                 placeholder={placeholder}
                 label={`VIA${index + 1}`}
                 value={value}
-                handleInput={e => this._handleInput(e, index)}
+                handleInput={e =>
+                  this._handleInput(e.value, e.formattedAddress, index)
+                }
               />
               {index === form.length - 1 && (
                 <a className={styles.addButton} onClick={this._handleAddButton}>
@@ -121,8 +157,12 @@ class Search extends React.PureComponent {
         })}
         <div className={classNames(styles.wrap, styles.fadein)}>
           <TextInputWithAutoComplete
-            placeholder="Yokohama station"
+            placeholder={lastForm.placeholder}
             label="GOAL"
+            value={lastForm.value}
+            handleInput={e =>
+              this._handleInput(e.value, e.formattedAddress, -2)
+            }
           />
         </div>
         <div className={styles.searchButtonWrap}>
@@ -130,7 +170,7 @@ class Search extends React.PureComponent {
             className={styles.searchButton}
             type="button"
             value="検索"
-            onClick={this._searchDirection}
+            onClick={this._handleSearchPress}
           />
         </div>
       </div>
