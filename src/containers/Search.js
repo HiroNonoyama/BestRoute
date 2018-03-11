@@ -49,7 +49,7 @@ class Search extends React.PureComponent {
     }, 500);
   };
 
-  _searchDirection() {
+  _searchDirection = () => {
     const { form, firstForm, lastForm } = this.state;
     const waypoints = form
       .filter(({ value }) => value !== "")
@@ -113,10 +113,8 @@ class Search extends React.PureComponent {
           }
         }
       });
-    } else {
-      alert("START, GOAL, また、VIAを一つ以上入力してください");
     }
-  }
+  };
 
   validationLineColorChange(isStart = false, isGoal = false, isVias = []) {
     const startForm = document.getElementById("textInput-START");
@@ -148,7 +146,16 @@ class Search extends React.PureComponent {
   }
 
   _handleSearchPress = () => {
-    this._searchDirection();
+    const { form, firstForm, lastForm } = this.state;
+    const filledFormLength = form.filter(v => v.value !== "").length;
+    const isFirstFilled = firstForm.value !== "";
+    const isLastFilled = lastForm.value !== "";
+    console.log(filledFormLength > 0 && isFirstFilled && isLastFilled);
+    if (filledFormLength > 0 && isFirstFilled && isLastFilled) {
+      this._searchDirection();
+    } else {
+      alert("START, GOAL, また、VIAを一つ以上入力してください");
+    }
   };
 
   _handleRemoveButton(index, random) {
@@ -191,7 +198,7 @@ class Search extends React.PureComponent {
             handleInput={e =>
               this._handleInput(e.value, e.formattedAddress, -1)
             }
-            handleEnter={this._handleSearchPress}
+            handleEnter={this._searchDirection}
           />
         </div>
         {form.map(({ placeholder, value }, index) => {
@@ -217,7 +224,7 @@ class Search extends React.PureComponent {
                 handleInput={e =>
                   this._handleInput(e.value, e.formattedAddress, index)
                 }
-                handleEnter={this._handleSearchPress}
+                handleEnter={this._searchDirection}
               />
               {index === form.length - 1 && (
                 <a className={styles.addButton} onClick={this._handleAddButton}>
@@ -235,7 +242,7 @@ class Search extends React.PureComponent {
             handleInput={e =>
               this._handleInput(e.value, e.formattedAddress, -2)
             }
-            handleEnter={this._handleSearchPress}
+            handleEnter={this._searchDirection}
           />
         </div>
         <div className={styles.searchButtonWrap}>
