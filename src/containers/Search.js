@@ -42,6 +42,11 @@ class Search extends React.PureComponent {
     this.setState({
       form: [...form, { placeholder: "", value: "", formattedAddress: "" }],
     });
+    const lastFormIndex = form.length + 1;
+
+    setTimeout(() => {
+      document.getElementById(`textInput-VIA${lastFormIndex}`).focus();
+    }, 500);
   };
 
   _searchDirection() {
@@ -75,15 +80,71 @@ class Search extends React.PureComponent {
 
       this.directionsService.route(request, (result, status) => {
         if (status === "OK") {
+          this.validationLineColorChange();
           this.directionsDisplay.setDirections(result);
         } else {
-          console.error(result);
-          // TODO: error handling
+          const { geocoded_waypoints } = result;
+          if (geocoded_waypoints) {
+            let validatedFirst;
+            let validatedLast;
+            const validatedIndexes = [];
+            geocoded_waypoints.map(({ geocoder_status }, index) => {
+              if (geocoder_status === "ZERO_RESULTS") {
+                switch (index) {
+                  case 0:
+                    validatedFirst = true;
+                    return;
+                  case geocoded_waypoints.length - 1:
+                    validatedLast = true;
+                    return;
+                  default:
+                    validatedIndexes.push(index - 1);
+                }
+              }
+            });
+            this.validationLineColorChange(
+              validatedFirst,
+              validatedLast,
+              validatedIndexes
+            );
+          } else {
+            this.validationLineColorChange();
+            alert("検索ワードを変えてもう一度試してください");
+          }
         }
       });
     } else {
-      // TODO: error handling
+      alert("START, GOAL, また、VIAを一つ以上入力してください");
     }
+  }
+
+  validationLineColorChange(isStart = false, isGoal = false, isVias = []) {
+    const startForm = document.getElementById("textInput-START");
+    const goalForm = document.getElementById("textInput-GOAL");
+    const { form } = this.state;
+
+    if (isStart) {
+      startForm.style.cssText = "border-color: #ff7070;";
+    } else {
+      startForm.style.cssText = "border-color: white;";
+    }
+
+    if (isGoal) {
+      goalForm.style.cssText = "border-color: #ff7070;";
+    } else {
+      goalForm.style.cssText = "border-color: white;";
+    }
+
+    form.filter(({ value }) => value !== "").forEach(({ value }, index) => {
+      const form = Array.from(
+        document.querySelectorAll(`input[value="${value}"]`)
+      );
+      if (isVias.indexOf(index) === -1) {
+        form.map(v => (v.style.cssText = "border-color: white;"));
+      } else {
+        form.map(v => (v.style.cssText = "border-color: #ff7070;"));
+      }
+    });
   }
 
   _handleSearchPress = () => {
@@ -130,6 +191,7 @@ class Search extends React.PureComponent {
             handleInput={e =>
               this._handleInput(e.value, e.formattedAddress, -1)
             }
+            handleEnter={this._handleSearchPress}
           />
         </div>
         {form.map(({ placeholder, value }, index) => {
@@ -139,7 +201,6 @@ class Search extends React.PureComponent {
               className={classNames(styles.wrap, styles.fadein)}
               key={index}
               data-index={random}
-              handleEnter={this._handleSearchPress}
             >
               {form.length > 1 && (
                 <a
