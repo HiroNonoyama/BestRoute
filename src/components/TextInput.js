@@ -3,6 +3,8 @@ import React, { Fragment } from "react";
 import styles from "../../styles/components/TextInput.scss";
 import WithAutoComplete from "../containers/WithAutoComplete";
 
+const ENTER_CHAR_CODE = 13;
+
 const TextInput = ({
   label,
   value,
@@ -10,6 +12,7 @@ const TextInput = ({
   randomId,
   autoComplete,
   handleInput,
+  handleEnter = () => {},
 }) => {
   return (
     <Fragment>
@@ -26,6 +29,9 @@ const TextInput = ({
         }}
         data-input={randomId}
         value={value}
+        onKeyPress={e => {
+          if (e.charCode === ENTER_CHAR_CODE) handleEnter();
+        }}
       />
     </Fragment>
   );

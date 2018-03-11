@@ -52,29 +52,38 @@ class Search extends React.PureComponent {
         location: formattedAddress ? formattedAddress : value,
       }));
 
-    const origin = firstForm.formattedAddress
-      ? firstForm.formattedAddress
-      : firstForm.value;
-    const destination = lastForm.formattedAddress
-      ? lastForm.formattedAddress
-      : lastForm.value;
+    if (
+      firstForm.value !== "" &&
+      lastForm.value !== "" &&
+      waypoints.length > 0
+    ) {
+      const origin = firstForm.formattedAddress
+        ? firstForm.formattedAddress
+        : firstForm.value;
+      const destination = lastForm.formattedAddress
+        ? lastForm.formattedAddress
+        : lastForm.value;
 
-    const request = {
-      origin,
-      destination,
-      waypoints,
-      provideRouteAlternatives: false,
-      travelMode: "DRIVING",
-      optimizeWaypoints: true,
-    };
+      const request = {
+        origin,
+        destination,
+        waypoints,
+        provideRouteAlternatives: false,
+        travelMode: "DRIVING",
+        optimizeWaypoints: true,
+      };
 
-    this.directionsService.route(request, (result, status) => {
-      if (status === "OK") {
-        this.directionsDisplay.setDirections(result);
-      } else {
-        // TODO: error handling
-      }
-    });
+      this.directionsService.route(request, (result, status) => {
+        if (status === "OK") {
+          this.directionsDisplay.setDirections(result);
+        } else {
+          console.error(result);
+          // TODO: error handling
+        }
+      });
+    } else {
+      // TODO: error handling
+    }
   }
 
   _handleSearchPress = () => {
@@ -130,6 +139,7 @@ class Search extends React.PureComponent {
               className={classNames(styles.wrap, styles.fadein)}
               key={index}
               data-index={random}
+              handleEnter={this._handleSearchPress}
             >
               {form.length > 1 && (
                 <a
@@ -146,6 +156,7 @@ class Search extends React.PureComponent {
                 handleInput={e =>
                   this._handleInput(e.value, e.formattedAddress, index)
                 }
+                handleEnter={this._handleSearchPress}
               />
               {index === form.length - 1 && (
                 <a className={styles.addButton} onClick={this._handleAddButton}>
@@ -163,6 +174,7 @@ class Search extends React.PureComponent {
             handleInput={e =>
               this._handleInput(e.value, e.formattedAddress, -2)
             }
+            handleEnter={this._handleSearchPress}
           />
         </div>
         <div className={styles.searchButtonWrap}>
