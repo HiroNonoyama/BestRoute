@@ -150,7 +150,6 @@ class Search extends React.PureComponent {
     const filledFormLength = form.filter(v => v.value !== "").length;
     const isFirstFilled = firstForm.value !== "";
     const isLastFilled = lastForm.value !== "";
-    console.log(filledFormLength > 0 && isFirstFilled && isLastFilled);
     if (filledFormLength > 0 && isFirstFilled && isLastFilled) {
       this._searchDirection();
     } else {
