@@ -1,4 +1,4 @@
-### start
+## start
 
 ```
 $ yarn
@@ -6,8 +6,8 @@ $ yarn start
 $ go to http://localhost:1234
 ```
 
-### build
+## build
 
 ```
-$ yarn watch
+$ yarn build
 ```

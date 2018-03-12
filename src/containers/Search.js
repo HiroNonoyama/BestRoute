@@ -213,7 +213,7 @@ class Search extends React.PureComponent {
                   className={styles.removeButton}
                   onClick={() => this._handleRemoveButton(index, random)}
                 >
-                  <FontAwesome name="times-circle" size="2x" />
+                  <FontAwesome name="times-circle" size="1x" />
                 </a>
               )}
               <TextInputWithAutoComplete

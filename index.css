@@ -1,43 +1,67 @@
+html,
+body {
+  height: 100%;
+  background: linear-gradient(90deg, #0a73ea, #01c3fc);
+}
+
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(90deg, #0a73ea, #0799f4, #01c3fc);
 }
 
-header {
-  background: linear-gradient(90deg, #0a73ea, #0799f4, #01c3fc);
-  height: 60px;
-  width: 100%;
-  padding-top: 40px;
-  padding-left: 80px;
-  position: fixed;
-  top: 0;
+@media (min-width: 1000px) {
+  header {
+    background: linear-gradient(90deg, #0a73ea, #01c3fc);
+    height: 60px;
+    padding-top: 30px;
+    padding-left: 30px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 200;
+  }
+  img {
+    height: 42px;
+    width: 42px;
+    float: left;
+  }
+}
+
+@media (max-width: 999px) and (min-width: 480px) {
+  header {
+    background: linear-gradient(90deg, #0a73ea, #01c3fc);
+    height: 60px;
+    padding-top: 30px;
+    padding-left: 30px;
+    width: 100%;
+  }
+  img {
+    height: 42px;
+    width: 42px;
+    float: left;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    height: 30px;
+    width: 100%;
+    padding-top: 15px;
+    padding-left: 15px;
+  }
+  img {
+    height: 30px;
+    width: 30px;
+    float: left;
+  }
+  html,
+  body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 header > h1 {
   margin: 0;
   color: white;
-}
-
-#react-entry {
-  margin-top: 60px;
-}
-
-footer {
-  height: 30px;
-  width: 100%;
-  bottom: 0;
-  padding-left: 30px;
-  padding-bottom: 5px;
-  position: fixed;
-}
-
-small {
-  color: white;
-}
-
-img {
-  height: 42px;
-  width: 42px;
-  float: left;
 }
