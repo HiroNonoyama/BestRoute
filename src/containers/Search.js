@@ -9,14 +9,14 @@ class Search extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      form: [{ placeholder: "Tokyo tower", value: "", formattedAddress: "" }],
+      form: [{ placeholder: "東京タワー", value: "", formattedAddress: "" }],
       firstForm: {
-        placeholder: "Tokyo station",
+        placeholder: "東京駅",
         value: "",
         formattedAddress: "",
       },
       lastForm: {
-        placeholder: "Yokohama station",
+        placeholder: "横浜駅",
         value: "",
         formattedAddress: "",
       },
@@ -81,7 +81,9 @@ class Search extends React.PureComponent {
       this.directionsService.route(request, (result, status) => {
         if (status === "OK") {
           this.validationLineColorChange();
-          this.directionsDisplay.setDirections(result);
+          this.directionsDisplay.setDirections(
+            this.nameModify(result, waypoints)
+          );
         } else {
           const { geocoded_waypoints } = result;
           if (geocoded_waypoints) {
@@ -115,6 +117,22 @@ class Search extends React.PureComponent {
       });
     }
   };
+
+  nameModify(result, waypoints) {
+    const { legs, waypoint_order } = result.routes[0];
+    const { firstForm, lastForm } = this.state;
+    legs.map((leg, index) => {
+      if (index === 0) {
+        leg["start_address"] = firstForm.value;
+      } else if (index === legs.length - 1) {
+        leg["start_address"] = waypoints[waypoint_order[index - 1]].location;
+        leg["end_address"] = lastForm.value;
+      } else {
+        leg["start_address"] = waypoints[waypoint_order[index - 1]].location;
+      }
+    });
+    return result;
+  }
 
   validationLineColorChange(isStart = false, isGoal = false, isVias = []) {
     const startForm = document.getElementById("textInput-START");
@@ -213,7 +231,7 @@ class Search extends React.PureComponent {
                   className={styles.removeButton}
                   onClick={() => this._handleRemoveButton(index, random)}
                 >
-                  <FontAwesome name="times-circle" size="1x" />
+                  <FontAwesome name="times-circle" size="lg" />
                 </a>
               )}
               <TextInputWithAutoComplete
