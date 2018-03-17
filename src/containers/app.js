@@ -4,7 +4,7 @@ import { render } from "react-dom";
 import Search from "./Search";
 import Map from "./Map";
 import styles from "../../styles/containers/app.scss";
-import { API_KEY } from "../constants";
+import { CONSTANT } from "../constants";
 
 const App = () => {
   return (
@@ -17,7 +17,10 @@ const App = () => {
 
 const setup = () => {
   const script = document.createElement("script");
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places,directions`;
+  const URL = `https://maps.googleapis.com/maps/api/js?key=${
+    CONSTANT.API_KEY
+  }&libraries=places,directions`;
+  script.src = URL;
   document.head.appendChild(script);
 
   render(<App />, document.getElementById("react-entry"));
