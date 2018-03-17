@@ -7,18 +7,11 @@ interface WithAutoCompleteState {
   predictions: any;
   isOpen: boolean;
   id: number;
-  handleInput: (obj: { value: string; formattedAddress: string }) => void;
-}
-
-interface WithAutoCompleteState {
-  predictions: any;
-  isOpen: boolean;
-  id: number;
 }
 
 const WithAutoComplete = (Component: any) =>
-  class extends React.PureComponent {
-    private random = Math.random();
+  class extends React.PureComponent<WithAutoCompleteState> {
+    private random: number = Math.random();
     state = { predictions: [], isOpen: false, id: this.random };
 
     _autoComplete(query) {
