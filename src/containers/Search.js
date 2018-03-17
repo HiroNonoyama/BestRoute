@@ -1,9 +1,7 @@
-import React from "react";
-import classNames from "classnames";
-import FontAwesome from "react-fontawesome";
+import React, { Fragment } from "react";
 
-import TextInputWithAutoComplete from "../components/TextInput";
 import styles from "../../styles/containers/Search.scss";
+import TextInputArea from "./TextInputArea";
 
 class Search extends React.PureComponent {
   constructor(props) {
@@ -20,6 +18,7 @@ class Search extends React.PureComponent {
         value: "",
         formattedAddress: "",
       },
+      result: {},
     };
   }
 
@@ -80,9 +79,10 @@ class Search extends React.PureComponent {
 
       this.directionsService.route(request, (result, status) => {
         if (status === "OK") {
-          this.validationLineColorChange();
+          this._validationLineColorChange();
+          this.setState({ result });
           this.directionsDisplay.setDirections(
-            this.nameModify(result, waypoints)
+            this._nameModify(result, waypoints)
           );
         } else {
           const { geocoded_waypoints } = result;
@@ -104,13 +104,13 @@ class Search extends React.PureComponent {
                 }
               }
             });
-            this.validationLineColorChange(
+            this._validationLineColorChange(
               validatedFirst,
               validatedLast,
               validatedIndexes
             );
           } else {
-            this.validationLineColorChange();
+            this._validationLineColorChange();
             alert("検索ワードを変えてもう一度試してください");
           }
         }
@@ -118,7 +118,7 @@ class Search extends React.PureComponent {
     }
   };
 
-  nameModify(result, waypoints) {
+  _nameModify(result, waypoints) {
     const { legs, waypoint_order } = result.routes[0];
     const { firstForm, lastForm } = this.state;
     legs.map((leg, index) => {
@@ -134,7 +134,7 @@ class Search extends React.PureComponent {
     return result;
   }
 
-  validationLineColorChange(isStart = false, isGoal = false, isVias = []) {
+  _validationLineColorChange(isStart = false, isGoal = false, isVias = []) {
     const startForm = document.getElementById("textInput-START");
     const goalForm = document.getElementById("textInput-GOAL");
     const { form } = this.state;
@@ -175,7 +175,7 @@ class Search extends React.PureComponent {
     }
   };
 
-  _handleRemoveButton(index, random) {
+  _handleRemoveButton = (index, random) => {
     const { form } = this.state;
     const nextForm = form.filter((_, i) => i !== index);
     const target = document.querySelector(`div[data-index="${random}"]`)
@@ -185,9 +185,9 @@ class Search extends React.PureComponent {
     setTimeout(() => {
       this.setState({ form: nextForm });
     }, 300);
-  }
+  };
 
-  _handleInput(value, formattedAddress = "", index) {
+  _handleInput = (value, formattedAddress = "", index) => {
     if (index >= 0) {
       const { form } = this.state;
       const targetForm = { ...form[index], value, formattedAddress };
@@ -200,76 +200,22 @@ class Search extends React.PureComponent {
     } else if (index === -2) {
       this.setState({ lastForm: { placeholder: "", value, formattedAddress } });
     }
-  }
+  };
 
   render() {
-    const { firstForm, form, lastForm } = this.state;
-
+    const { firstForm, lastForm, form } = this.state;
     return (
       <div className={styles.container}>
-        <div className={classNames(styles.wrap, styles.fadein)}>
-          <TextInputWithAutoComplete
-            placeholder={firstForm.placeholder}
-            label="START"
-            value={firstForm.value}
-            handleInput={e =>
-              this._handleInput(e.value, e.formattedAddress, -1)
-            }
-            handleEnter={this._searchDirection}
-          />
-        </div>
-        {form.map(({ placeholder, value }, index) => {
-          const random = Math.random();
-          return (
-            <div
-              className={classNames(styles.wrap, styles.fadein)}
-              key={index}
-              data-index={random}
-            >
-              {form.length > 1 && (
-                <a
-                  className={styles.removeButton}
-                  onClick={() => this._handleRemoveButton(index, random)}
-                >
-                  <FontAwesome name="times-circle" size="lg" />
-                </a>
-              )}
-              <TextInputWithAutoComplete
-                placeholder={placeholder}
-                label={`VIA${index + 1}`}
-                value={value}
-                handleInput={e =>
-                  this._handleInput(e.value, e.formattedAddress, index)
-                }
-                handleEnter={this._searchDirection}
-              />
-              {index === form.length - 1 && (
-                <a className={styles.addButton} onClick={this._handleAddButton}>
-                  <FontAwesome name="plus-circle" size="2x" />
-                </a>
-              )}
-            </div>
-          );
-        })}
-        <div className={classNames(styles.wrap, styles.fadein)}>
-          <TextInputWithAutoComplete
-            placeholder={lastForm.placeholder}
-            label="GOAL"
-            value={lastForm.value}
-            handleInput={e =>
-              this._handleInput(e.value, e.formattedAddress, -2)
-            }
-            handleEnter={this._searchDirection}
-          />
-        </div>
-        <div className={styles.searchButtonWrap}>
-          <input
-            className={styles.searchButton}
-            type="button"
-            value="検索"
-            onClick={this._handleSearchPress}
-          />
-        </div>
+        <TextInputArea
+          firstForm={firstForm}
+          lastForm={lastForm}
+          form={form}
+          searchDirection={this._searchDirection}
+          handleRemoveButton={this._handleRemoveButton}
+          handleInput={this._handleInput}
+          handleSearchPress={this._handleSearchPress}
+          handleAddButton={this._handleAddButton}
+        />
       </div>
     );
   }

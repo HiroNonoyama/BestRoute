@@ -1,9 +1,19 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 
-import styles from "../../styles/components/TextInput.scss";
+import * as styles from "../../styles/components/TextInput.scss";
 import WithAutoComplete from "../containers/WithAutoComplete";
 
 const ENTER_CHAR_CODE = 13;
+
+interface textInputProps {
+  label: string;
+  value: string;
+  placeholder: string | undefined;
+  randomId: number;
+  autoComplete: (value: string) => void;
+  handleInput: (obj: { value: string; formattedAddress: string }) => void;
+  handleEnter: () => void;
+}
 
 const TextInput = ({
   label,
@@ -13,9 +23,9 @@ const TextInput = ({
   autoComplete,
   handleInput,
   handleEnter = () => {},
-}) => {
+}: textInputProps) => {
   return (
-    <Fragment>
+    <React.Fragment>
       <label className={styles.label} htmlFor={`textInput-{label}`}>
         {label}：
       </label>
@@ -33,7 +43,7 @@ const TextInput = ({
           if (e.charCode === ENTER_CHAR_CODE) handleEnter();
         }}
       />
-    </Fragment>
+    </React.Fragment>
   );
 };
 

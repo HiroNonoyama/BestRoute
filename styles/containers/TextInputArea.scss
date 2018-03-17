@@ -1,0 +1,109 @@
+@media (min-width: 1000px) {
+  .wrap {
+    margin-bottom: 10px;
+    width: 470px;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 999px) {
+  .wrap {
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 90%;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    text-align: left;
+    padding-left: 20px;
+    margin-bottom: 30px;
+  }
+}
+
+.fadein {
+  animation-name: fadeIn;
+  animation-duration: 0.8s;
+}
+
+.fadeout {
+  animation-name: fadeOut;
+  animation-duration: 0.3s;
+}
+
+.addButton {
+  display: inline-block;
+  position: relative;
+  color: white;
+  left: 30px;
+  &:hover {
+    cursor: pointer;
+    color: #0a73ea;
+  }
+}
+
+.removeButton {
+  position: relative;
+  color: rgba(255, 255, 255, 0.3);
+  display: block;
+  float: left;
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    position: relative;
+    top: -50px;
+    opacity: 0;
+  }
+  100% {
+    position: relative;
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    position: relative;
+    top: 0px;
+    opacity: 1;
+  }
+  100% {
+    position: relative;
+    top: -50px;
+    opacity: 0;
+  }
+}
+
+.searchButtonWrap {
+  width: 100%;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.searchButton {
+  width: 60px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 8px;
+  border-width: 2px;
+  border-color: white;
+  cursor: pointer;
+  color: #7bc4ff;
+  font-size: 14px;
+  outline: none;
+  &:hover {
+    border-style: solid;
+    border-color: white;
+    color: white;
+  }
+}

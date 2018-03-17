@@ -1,15 +1,25 @@
-import React, { Fragment } from "react";
-import debounce from "lodash.debounce";
+import * as React from "react";
+import * as debounce from "lodash.debounce";
 
 import { API_KEY } from "../constants";
 
-const WithAutoComplete = Component =>
+interface WithAutoCompleteState {
+  predictions: any;
+  isOpen: boolean;
+  id: number;
+  handleInput: (obj: { value: string; formattedAddress: string }) => void;
+}
+
+interface WithAutoCompleteState {
+  predictions: any;
+  isOpen: boolean;
+  id: number;
+}
+
+const WithAutoComplete = (Component: any) =>
   class extends React.PureComponent {
-    constructor(props) {
-      super(props);
-      const random = Math.random();
-      this.state = { predictions: [], isOpen: false, id: random };
-    }
+    private random = Math.random();
+    state = { predictions: [], isOpen: false, id: this.random };
 
     _autoComplete(query) {
       const { id } = this.state;
@@ -29,13 +39,13 @@ const WithAutoComplete = Component =>
     render() {
       const { id } = this.state;
       return (
-        <Fragment>
+        <React.Fragment>
           <Component
             autoComplete={debounce(value => this._autoComplete(value), 1000)}
             randomId={id}
             {...this.props}
           />
-        </Fragment>
+        </React.Fragment>
       );
     }
   };
