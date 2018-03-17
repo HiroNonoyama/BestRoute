@@ -1,26 +1,36 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 
-import styles from "../../styles/containers/Search.scss";
+import * as styles from "../../styles/containers/Search.scss";
 import TextInputArea from "./TextInputArea";
 
-class Search extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      form: [{ placeholder: "東京タワー", value: "", formattedAddress: "" }],
-      firstForm: {
-        placeholder: "東京駅",
-        value: "",
-        formattedAddress: "",
-      },
-      lastForm: {
-        placeholder: "横浜駅",
-        value: "",
-        formattedAddress: "",
-      },
-      result: {},
-    };
-  }
+interface Form {
+  placeholder: string;
+  value: string;
+  formattedAddress: string;
+}
+
+interface SearchState {
+  form: Form[];
+  firstForm: Form;
+  lastForm: Form;
+  result: any;
+}
+
+class Search extends React.PureComponent<SearchState> {
+  state = {
+    form: [{ placeholder: "東京タワー", value: "", formattedAddress: "" }],
+    firstForm: {
+      placeholder: "東京駅",
+      value: "",
+      formattedAddress: "",
+    },
+    lastForm: {
+      placeholder: "横浜駅",
+      value: "",
+      formattedAddress: "",
+    },
+    result: {},
+  };
 
   componentDidMount() {
     setTimeout(() => {
@@ -156,9 +166,9 @@ class Search extends React.PureComponent {
         document.querySelectorAll(`input[value="${value}"]`)
       );
       if (isVias.indexOf(index) === -1) {
-        form.map(v => (v.style.cssText = "border-color: white;"));
+        form.map((v: any) => (v.style.cssText = "border-color: white;"));
       } else {
-        form.map(v => (v.style.cssText = "border-color: #ff7070;"));
+        form.map((v: any) => (v.style.cssText = "border-color: #ff7070;"));
       }
     });
   }

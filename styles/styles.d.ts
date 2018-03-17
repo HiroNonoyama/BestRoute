@@ -1,4 +1,4 @@
 declare module "*.scss" {
-  const scss: any;
-  export default scss;
+  const scss: { [className: string]: string };
+  export = scss;
 }
