@@ -1,0 +1,11 @@
+@media (min-width: 1000px) {
+  .container {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: -300px;
+    width: 300px;
+    background: transparent;
+    z-index: 250;
+  }
+}

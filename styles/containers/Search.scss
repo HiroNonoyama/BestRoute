@@ -1,8 +1,10 @@
 @media (min-width: 1000px) {
   .container {
     width: 500px;
-    padding: 80px 0px;
-    height: 100%;
+    top: 160px;
+    left: 0px;
+    bottom: 0px;
+    position: absolute;
   }
   .wrap {
     margin-bottom: 10px;
@@ -98,29 +100,5 @@
     position: relative;
     top: -50px;
     opacity: 0;
-  }
-}
-
-.searchButtonWrap {
-  width: 100%;
-  margin-top: 100px;
-  text-align: center;
-}
-
-.searchButton {
-  width: 60px;
-  height: 30px;
-  background-color: transparent;
-  border-radius: 8px;
-  border-width: 2px;
-  border-color: white;
-  cursor: pointer;
-  color: #7bc4ff;
-  font-size: 14px;
-  outline: none;
-  &:hover {
-    border-style: solid;
-    border-color: white;
-    color: white;
   }
 }

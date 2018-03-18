@@ -3,6 +3,7 @@ import { render } from "react-dom";
 
 import Search from "./Search";
 import Map from "./Map";
+import Result from "./Result";
 import styles from "../../styles/containers/app.scss";
 import { CONSTANT } from "../constants";
 
@@ -11,6 +12,7 @@ const App = () => {
     <div className={styles.wrapper}>
       <Search />
       <Map />
+      <Result />
     </div>
   );
 };
