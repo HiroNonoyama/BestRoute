@@ -19,7 +19,7 @@ export default class Result extends React.PureComponent<ResultProps> {
     setTimeout(() => {
       this.props.expand();
       target.add(styles.fadeIn);
-    }, 10);
+    }, 1);
   };
 
   fadeOut = () => {
@@ -28,7 +28,7 @@ export default class Result extends React.PureComponent<ResultProps> {
     setTimeout(() => {
       this.props.shrink();
       target.add(styles.fadeOut);
-    }, 10);
+    }, 1);
   };
 
   render() {

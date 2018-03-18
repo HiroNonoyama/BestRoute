@@ -10,12 +10,12 @@ import { CONSTANT } from "../constants";
 class App extends React.PureComponent {
   state = { isLeftShow: true, isRightShow: false };
 
-  leftExpand = () => {
-    this.setState({ isLeftShow: true });
+  mapLeftExpand = () => {
+    this.setState({ isLeftShow: false });
   };
 
-  leftShrink = () => {
-    this.setState({ isLeftShow: false });
+  mapLeftShrink = () => {
+    this.setState({ isLeftShow: true });
   };
 
   rightExpand = () => {
@@ -30,12 +30,12 @@ class App extends React.PureComponent {
     const { isRightShow, isLeftShow } = this.state;
     return (
       <div className={styles.wrapper}>
-        <Search
-          isShowed={isLeftShow}
-          leftExpand={this.leftExpand}
-          leftShrink={this.leftShrink}
+        <Search />
+        <Map
+          {...this.state}
+          expand={this.mapLeftExpand}
+          shrink={this.mapLeftShrink}
         />
-        <Map {...this.state} />
         <Result
           isShowed={isRightShow}
           expand={this.rightExpand}
