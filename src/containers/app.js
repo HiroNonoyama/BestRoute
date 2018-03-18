@@ -7,15 +7,44 @@ import Result from "./Result";
 import styles from "../../styles/containers/app.scss";
 import { CONSTANT } from "../constants";
 
-const App = () => {
-  return (
-    <div className={styles.wrapper}>
-      <Search />
-      <Map />
-      <Result />
-    </div>
-  );
-};
+class App extends React.PureComponent {
+  state = { isLeftShow: true, isRightShow: false };
+
+  leftExpand = () => {
+    this.setState({ isLeftShow: true });
+  };
+
+  leftShrink = () => {
+    this.setState({ isLeftShow: false });
+  };
+
+  rightExpand = () => {
+    this.setState({ isRightShow: true });
+  };
+
+  rightShrink = () => {
+    this.setState({ isRightShow: false });
+  };
+
+  render() {
+    const { isRightShow, isLeftShow } = this.state;
+    return (
+      <div className={styles.wrapper}>
+        <Search
+          isShowed={isLeftShow}
+          leftExpand={this.leftExpand}
+          leftShrink={this.leftShrink}
+        />
+        <Map {...this.state} />
+        <Result
+          isShowed={isRightShow}
+          expand={this.rightExpand}
+          shrink={this.rightShrink}
+        />
+      </div>
+    );
+  }
+}
 
 const setup = () => {
   const script = document.createElement("script");

@@ -4,25 +4,21 @@ import * as FontAwesome from "react-fontawesome";
 
 import * as styles from "../../styles/containers/Result.scss";
 
-interface ResultProps {}
-
-interface ResultState {
+interface ResultProps {
+  expand: () => void;
+  shrink: () => void;
   isShowed: boolean;
 }
 
-export default class Result extends React.PureComponent<
-  ResultProps,
-  ResultState
-> {
+export default class Result extends React.PureComponent<ResultProps> {
   private ref;
-  state = { isShowed: false };
 
   fadeIn = () => {
     const target = this.ref.classList;
     target.remove(styles.fadeOut);
     setTimeout(() => {
+      this.props.expand();
       target.add(styles.fadeIn);
-      this.setState({ isShowed: true });
     }, 10);
   };
 
@@ -30,13 +26,13 @@ export default class Result extends React.PureComponent<
     const target = this.ref.classList;
     target.remove(styles.fadeIn);
     setTimeout(() => {
+      this.props.shrink();
       target.add(styles.fadeOut);
-      this.setState({ isShowed: false });
     }, 10);
   };
 
   render() {
-    const { isShowed } = this.state;
+    const { isShowed } = this.props;
     return (
       <div
         ref={ref => {
