@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import * as styles from "../../styles/components/TextInput.scss";
-import WithAutoComplete from "../containers/WithAutoComplete";
+import WithAutoComplete from "./WithAutoComplete";
 
 const ENTER_CHAR_CODE = 13;
 
