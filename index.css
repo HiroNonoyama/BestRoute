@@ -25,6 +25,9 @@ body {
     width: 42px;
     float: left;
   }
+  body {
+    overflow: hidden;
+  }
 }
 
 @media (max-width: 999px) and (min-width: 480px) {

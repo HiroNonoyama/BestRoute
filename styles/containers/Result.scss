@@ -5,7 +5,11 @@
     right: 0px;
     bottom: -300px;
     width: 300px;
-    background: transparent;
+    background: linear-gradient(0deg, #0a73ea, red);
     z-index: 250;
+    overflow: auto;
+  }
+  .container::-webkit-scrollbar {
+    display: none;
   }
 }
