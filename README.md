@@ -3,7 +3,7 @@
 ```
 $ yarn
 $ yarn start
-$ go to http://localhost:1234
+Open http://localhost:1234/
 ```
 
 ## build
