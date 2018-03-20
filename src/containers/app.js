@@ -4,6 +4,7 @@ import { render } from "react-dom";
 import Search from "./Search";
 import Map from "./Map";
 import Result from "./Result";
+import { UpButton } from "../components/UpButton";
 import styles from "../../styles/containers/app.scss";
 import { CONSTANT } from "../constants";
 
@@ -30,10 +31,20 @@ class App extends React.PureComponent {
     this.setState({ result });
   };
 
+  goToTop = () => {
+    document.getElementsByTagName("body")[0].scrollTop = 0;
+    document.getElementsByTagName("html")[0].scrollTop = 0;
+  };
+
   render() {
     const { isRightShow, isLeftShow, result } = this.state;
     return (
-      <div className={styles.wrapper}>
+      <div
+        className={styles.wrapper}
+        ref={ref => {
+          this.root = ref;
+        }}
+      >
         <Search setResult={this.setResult} />
         <Map
           {...this.state}
@@ -46,6 +57,7 @@ class App extends React.PureComponent {
           expand={this.rightExpand}
           shrink={this.rightShrink}
         />
+        <UpButton handleClick={this.goToTop} />
       </div>
     );
   }

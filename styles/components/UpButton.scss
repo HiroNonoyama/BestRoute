@@ -1,0 +1,16 @@
+@media (min-width: 680px) {
+  .upButton {
+    display: none;
+  }
+}
+
+@media (max-width: 679px) {
+  .upButton {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: transparent;
+    z-index: 250;
+    cursor: pointer;
+  }
+}

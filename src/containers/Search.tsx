@@ -93,6 +93,12 @@ class Search extends React.PureComponent<SearchState> {
           this.directionsDisplay.setDirections(
             this._nameModify(result, waypoints)
           );
+          if (window.innerWidth) {
+            const { y } = document
+              .getElementById("map")
+              .getBoundingClientRect();
+            document.getElementsByTagName("body")[0].scrollTop = y;
+          }
         } else {
           const { geocoded_waypoints } = result;
           if (geocoded_waypoints) {

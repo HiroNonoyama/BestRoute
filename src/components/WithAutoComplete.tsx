@@ -22,7 +22,6 @@ const WithAutoComplete = (Component: any) =>
       );
       input.addListener("place_changed", () => {
         const place = input.getPlace();
-        console.log(place);
         this.props.handleInput({
           value: place.name,
           formattedAddress: place.formatted_address,
