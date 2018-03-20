@@ -35,7 +35,7 @@ class Map extends React.PureComponent<MapProps> {
       target.remove(styles.rightShrink);
       target.add(styles.rightExpand);
       target.remove(styles.rightExpandAnimation);
-    }, 600);
+    }, 550);
   }
 
   rightShrink() {
@@ -45,7 +45,7 @@ class Map extends React.PureComponent<MapProps> {
       target.remove(styles.rightExpand);
       target.add(styles.rightShrink);
       target.remove(styles.rightShrinkAnimation);
-    }, 600);
+    }, 550);
   }
 
   leftExpand = () => {
@@ -56,7 +56,7 @@ class Map extends React.PureComponent<MapProps> {
       this.props.expand();
       target.add(styles.leftExpand);
       target.remove(styles.leftExpandAnimation);
-    }, 600);
+    }, 550);
   };
 
   leftShrink = () => {
@@ -67,7 +67,7 @@ class Map extends React.PureComponent<MapProps> {
       target.remove(styles.leftExpand);
       target.add(styles.leftShrink);
       target.remove(styles.leftShrinkAnimation);
-    }, 600);
+    }, 550);
   };
 
   render() {
