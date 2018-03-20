@@ -39,14 +39,14 @@ header > h1 {
   header {
     background: linear-gradient(90deg, #0a73ea, #01c3fc);
     height: 60px;
-    padding-top: 30px;
-    padding-left: 30px;
+    padding-top: 15px;
     width: 100%;
   }
   img {
     height: 42px;
     width: 42px;
     float: left;
+    margin-left: 15px;
   }
 }
 
