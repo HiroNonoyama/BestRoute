@@ -1,9 +1,4 @@
-@media (min-width: 480px) {
-  .button {
-    display: none;
-  }
-}
-@media (min-width: 1000px) {
+@media (min-width: 680px) {
   .container {
     position: absolute;
     top: 0px;
@@ -99,6 +94,86 @@
     margin-left: 15px;
     float: left;
     margin-right: 24px;
+  }
+}
+
+@media (max-width: 679px) {
+  .button {
+    display: none;
+  }
+  .container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .row {
+    height: 100px;
+    width: 100%;
+  }
+  .point {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    background-color: #e7453c;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-weight: 500;
+  }
+  .start {
+    margin-left: 15px;
+    vertical-align: middle;
+    color: white;
+    font-size: 14px;
+    line-height: 14px;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 340px;
+    display: inline-block;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .infoWrap {
+    height: 70px;
+  }
+  .dot {
+    border-width: 0px;
+    border-left-width: 1px;
+    border-style: dotted;
+    height: 52px;
+    color: white;
+    float: left;
+    display: inline-block;
+    margin-left: 15px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+  }
+  .info {
+    height: 52px;
+    color: white;
+    vertical-align: middle;
+    line-height: 52px;
+    font-family: Lato, sans-serif;
+    padding-left: 30px;
+    padding-top: 9px;
+    display: inline-block;
+    padding-bottom: 9px;
+  }
+  .resultWrap {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    display: none;
   }
 }
 

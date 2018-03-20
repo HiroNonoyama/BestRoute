@@ -1,4 +1,4 @@
-@media (min-width: 1000px) {
+@media (min-width: 680px) {
   .wrap {
     margin-bottom: 10px;
     width: 100%;
@@ -23,7 +23,6 @@
       color: #0a73ea;
     }
   }
-
   .removeButton {
     position: absolute;
     left: 10px;
@@ -37,23 +36,79 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 679px) and (min-width: 481px) {
   .wrap {
     display: inline-block;
     margin-bottom: 10px;
     width: 90%;
     padding: 10px 15px;
+    vertical-align: middle;
+    line-height: 30px;
+    height: 30px;
+  }
+  .addButton {
+    position: absolute;
+    color: white;
+    outline: none;
+    height: 30px;
+    width: 30px;
+    background: transparent;
+    border-width: 0;
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      color: #0a73ea;
+    }
+  }
+  .removeButton {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.3);
+    display: block;
+    float: left;
+    &:hover {
+      cursor: pointer;
+      color: white;
+    }
   }
 }
 
 @media (max-width: 480px) {
   .wrap {
     display: inline-block;
-    width: 100%;
+    width: 90%;
     height: 30px;
-    text-align: left;
-    padding-left: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 30px;
+    vertical-align: middle;
+  }
+  .addButton {
+    position: relative;
+    right: 0px;
+    color: white;
+    outline: none;
+    height: 30px;
+    width: 0px;
+    padding: 0px;
+    background: transparent;
+    border-width: 0;
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      color: #0a73ea;
+    }
+  }
+  .removeButton {
+    position: relative;
+    color: rgba(255, 255, 255, 0.3);
+    width: 0px;
+    display: block;
+    float: left;
+    &:hover {
+      cursor: pointer;
+      color: white;
+    }
   }
 }
 
@@ -104,7 +159,7 @@
   height: 30px;
   background-color: transparent;
   border-radius: 8px;
-  border-width: 2px;
+  border-width: 1px;
   border-color: white;
   font-family: "YuGothic";
   cursor: pointer;

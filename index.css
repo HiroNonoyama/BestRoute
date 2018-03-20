@@ -14,7 +14,7 @@ header > h1 {
   color: white;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 680px) {
   header {
     background: linear-gradient(90deg, #0a73ea, #01c3fc);
     height: 60px;
@@ -35,7 +35,7 @@ header > h1 {
   }
 }
 
-@media (max-width: 999px) and (min-width: 480px) {
+@media (max-width: 679px) and (min-width: 480px) {
   header {
     background: linear-gradient(90deg, #0a73ea, #01c3fc);
     height: 60px;

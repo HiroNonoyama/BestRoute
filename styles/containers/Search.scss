@@ -1,4 +1,4 @@
-@media (min-width: 1000px) {
+@media (min-width: 680px) {
   .container {
     width: 300px;
     top: 80px;
@@ -19,7 +19,7 @@
   }
 }
 
-@media (max-width: 999px) {
+@media (max-width: 679px) and (min-width: 481px) {
   .container {
     width: 400px;
     margin-left: auto;
