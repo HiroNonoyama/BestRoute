@@ -32,6 +32,13 @@ export default function TextInputArea({
   handleSearchPress,
   handleAddButton,
 }: TextInputProps) {
+  const _pressRemoveButton = (index, random) => {
+    const target = document.querySelector(`div[data-index="${random}"]`)
+      .classList;
+    target.remove(styles.fadeout);
+    setTimeout(() => target.add(styles.fadeout), 1);
+    handleRemoveButton(index, random);
+  };
   return (
     <React.Fragment>
       <div className={classNames(styles.wrap, styles.fadein)}>
@@ -54,7 +61,7 @@ export default function TextInputArea({
             {form.length > 1 && (
               <a
                 className={styles.removeButton}
-                onClick={() => handleRemoveButton(index, random)}
+                onClick={() => _pressRemoveButton(index, random)}
               >
                 <FontAwesome name="times-circle" size="lg" />
               </a>
@@ -67,9 +74,14 @@ export default function TextInputArea({
               handleEnter={searchDirection}
             />
             {index === form.length - 1 && (
-              <a className={styles.addButton} onClick={handleAddButton}>
+              <button
+                className={styles.addButton}
+                onClick={handleAddButton}
+                id="addButton"
+                type="button"
+              >
                 <FontAwesome name="plus-circle" size="2x" />
-              </a>
+              </button>
             )}
           </div>
         );

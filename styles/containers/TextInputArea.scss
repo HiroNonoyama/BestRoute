@@ -1,8 +1,11 @@
 @media (min-width: 1000px) {
   .wrap {
     margin-bottom: 10px;
-    width: 470px;
-    padding: 10px 15px;
+    width: 100%;
+    overflow-x: hidden;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
   }
 }
 
@@ -37,18 +40,25 @@
 }
 
 .addButton {
-  display: inline-block;
-  position: relative;
+  position: absolute;
+  left: 270px;
   color: white;
-  left: 30px;
-  &:hover {
+  outline: none;
+  height: 30px;
+  width: 30px;
+  background: transparent;
+  border-width: 0;
+  padding: 0px;
+  &:hover,
+  &:focus {
     cursor: pointer;
     color: #0a73ea;
   }
 }
 
 .removeButton {
-  position: relative;
+  position: absolute;
+  left: 10px;
   color: rgba(255, 255, 255, 0.3);
   display: block;
   float: left;
@@ -97,9 +107,10 @@
   border-radius: 8px;
   border-width: 2px;
   border-color: white;
+  font-family: "YuGothic";
   cursor: pointer;
   color: #7bc4ff;
-  font-size: 14px;
+  font-size: 12px;
   outline: none;
   &:hover {
     border-style: solid;

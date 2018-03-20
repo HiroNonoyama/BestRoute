@@ -30,11 +30,12 @@
   .label {
     color: white;
     font-weight: 400;
-    font-size: 18px;
-    width: 90px;
+    font-size: 12px;
+    width: 50px;
     display: block;
     float: left;
-    text-align: center;
+    text-align: right;
+    font-family: Lato, sans-serif;
   }
   .input {
     border-width: 0;
@@ -44,10 +45,11 @@
     color: white;
     outline-width: 0;
     height: 30px;
-    font-size: 20px;
+    font-size: 16px;
     padding-left: 10px;
     font-weight: lighter;
-    width: 300px;
+    font-family: "YuGothic";
+    width: 200px;
     &::-webkit-input-placeholder {
       color: #6fb4ec;
     }

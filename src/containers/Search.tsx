@@ -6,6 +6,7 @@ import TextInputArea from "./TextInputArea";
 interface Form {
   placeholder: string;
   value: string;
+  setResult: (any) => void;
   formattedAddress: string;
 }
 
@@ -13,7 +14,6 @@ interface SearchState {
   form: Form[];
   firstForm: Form;
   lastForm: Form;
-  result: any;
 }
 
 class Search extends React.PureComponent<SearchState> {
@@ -29,7 +29,6 @@ class Search extends React.PureComponent<SearchState> {
       value: "",
       formattedAddress: "",
     },
-    result: {},
   };
 
   componentDidMount() {
@@ -90,7 +89,7 @@ class Search extends React.PureComponent<SearchState> {
       this.directionsService.route(request, (result, status) => {
         if (status === "OK") {
           this._validationLineColorChange();
-          this.setState({ result });
+          this.props.setResult(this._nameModify(result, waypoints));
           this.directionsDisplay.setDirections(
             this._nameModify(result, waypoints)
           );
@@ -188,10 +187,6 @@ class Search extends React.PureComponent<SearchState> {
   _handleRemoveButton = (index, random) => {
     const { form } = this.state;
     const nextForm = form.filter((_, i) => i !== index);
-    const target = document.querySelector(`div[data-index="${random}"]`)
-      .classList;
-    target.remove(styles.fadeout);
-    setTimeout(() => target.add(styles.fadeout), 20);
     setTimeout(() => {
       this.setState({ form: nextForm });
     }, 300);

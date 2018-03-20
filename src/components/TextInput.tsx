@@ -27,7 +27,7 @@ const TextInput = ({
   return (
     <React.Fragment>
       <label className={styles.label} htmlFor={`textInput-{label}`}>
-        {label}：
+        {label}
       </label>
       <input
         className={styles.input}

@@ -8,7 +8,7 @@ import styles from "../../styles/containers/app.scss";
 import { CONSTANT } from "../constants";
 
 class App extends React.PureComponent {
-  state = { isLeftShow: true, isRightShow: false };
+  state = { isLeftShow: true, isRightShow: false, result: {} };
 
   mapLeftExpand = () => {
     this.setState({ isLeftShow: false });
@@ -26,11 +26,15 @@ class App extends React.PureComponent {
     this.setState({ isRightShow: false });
   };
 
+  setResult = result => {
+    this.setState({ result });
+  };
+
   render() {
-    const { isRightShow, isLeftShow } = this.state;
+    const { isRightShow, isLeftShow, result } = this.state;
     return (
       <div className={styles.wrapper}>
-        <Search />
+        <Search setResult={this.setResult} />
         <Map
           {...this.state}
           expand={this.mapLeftExpand}
@@ -38,6 +42,7 @@ class App extends React.PureComponent {
         />
         <Result
           isShowed={isRightShow}
+          result={result}
           expand={this.rightExpand}
           shrink={this.rightShrink}
         />

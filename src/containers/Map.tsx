@@ -51,6 +51,8 @@ class Map extends React.PureComponent<MapProps> {
   leftExpand = () => {
     const target = this.ref.classList;
     target.add(styles.leftExpandAnimation);
+    document.getElementById("header-title").classList.remove(styles.fadein);
+    document.getElementById("header-title").classList.add(styles.fadeout);
     setTimeout(() => {
       target.remove(styles.leftShrink);
       this.props.expand();
@@ -61,6 +63,8 @@ class Map extends React.PureComponent<MapProps> {
 
   leftShrink = () => {
     const target = this.ref.classList;
+    document.getElementById("header-title").classList.remove(styles.fadeout);
+    document.getElementById("header-title").classList.add(styles.fadein);
     target.add(styles.leftShrinkAnimation);
     setTimeout(() => {
       this.props.shrink();
