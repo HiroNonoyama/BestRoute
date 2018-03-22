@@ -28,6 +28,7 @@
     width: 20px;
     display: inline-block;
     color: white;
+    cursor: pointer;
   }
   .resultWrap {
     width: 280px;
@@ -49,10 +50,10 @@
     font-family: "YuGothic";
   }
   .point {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     line-height: 30px;
-    border-radius: 15px;
+    border-radius: 14px;
     border-width: 0px;
     margin-right: 20px;
     background-color: #e7453c;
@@ -62,6 +63,9 @@
     text-align: center;
     vertical-align: middle;
     float: left;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
   }
   .start {
     line-height: 30px;
@@ -114,15 +118,18 @@
   }
   .point {
     display: inline-block;
-    height: 30px;
-    width: 30px;
-    border-radius: 15px;
+    height: 28px;
+    width: 28px;
+    border-width: 1px;
+    border-color: white;
+    border-radius: 14px;
     background-color: #e7453c;
     vertical-align: middle;
     text-align: center;
     line-height: 30px;
     color: white;
     font-weight: 500;
+    border-style: solid;
   }
   .start {
     margin-left: 15px;
