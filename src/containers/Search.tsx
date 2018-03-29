@@ -6,7 +6,6 @@ import TextInputArea from "./TextInputArea";
 interface Form {
   placeholder: string;
   value: string;
-  setResult: (any) => void;
   formattedAddress: string;
 }
 
@@ -17,7 +16,11 @@ interface SearchState {
 }
 
 class Search extends React.PureComponent<SearchState> {
-  state = {
+  private directionsDisplay: any;
+  private directionsService: any;
+  private map: any;
+
+  state: SearchState = {
     form: [{ placeholder: "東京タワー", value: "", formattedAddress: "" }],
     firstForm: {
       placeholder: "東京駅",
