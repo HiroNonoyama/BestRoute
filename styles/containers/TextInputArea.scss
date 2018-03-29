@@ -84,12 +84,10 @@
     vertical-align: middle;
   }
   .addButton {
-    position: relative;
-    right: 0px;
+    position: absolute;
     color: white;
     outline: none;
     height: 30px;
-    width: 0px;
     padding: 0px;
     background: transparent;
     border-width: 0;
@@ -100,9 +98,8 @@
     }
   }
   .removeButton {
-    position: relative;
+    position: absolute;
     color: rgba(255, 255, 255, 0.3);
-    width: 0px;
     display: block;
     float: left;
     &:hover {
