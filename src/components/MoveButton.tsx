@@ -10,7 +10,7 @@ export function MoveButton({ handleTopClick, handleBottomClick }) {
       <a className={styles.upButton} onClick={handleTopClick} role="button">
         <FontAwesome
           name="chevron-circle-up"
-          size="2x"
+          size="3x"
           className={styles.icon}
         />
       </a>
@@ -21,7 +21,7 @@ export function MoveButton({ handleTopClick, handleBottomClick }) {
       >
         <FontAwesome
           name="chevron-circle-down"
-          size="2x"
+          size="3x"
           className={styles.icon}
         />
       </a>

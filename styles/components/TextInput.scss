@@ -60,19 +60,20 @@
 
 @media (max-width: 480px) {
   .label {
-    color: white;
-    font-weight: 400;
-    font-size: 12px;
-    width: 10%;
-    display: block;
-    float: left;
-    text-align: right;
-    font-family: Lato, sans-serif;
+    // color: white;
+    // font-weight: 400;
+    // font-size: 12px;
+    // width: 10%;
+    // display: block;
+    // float: left;
+    // text-align: right;
+    // font-family: Lato, sans-serif;
+    display: none;
   }
   .input {
     border-width: 0;
     border-bottom-width: 1px;
-    border-bottom-color: white;
+    border-bottom-color: rgba(255, 255, 255, 0.644);
     background-color: transparent;
     color: white;
     outline-width: 0;
@@ -80,8 +81,9 @@
     font-size: 16px;
     font-weight: lighter;
     font-family: "YuGothic";
-    width: 70%;
+    width: 80%;
     padding-left: 5px;
+    border-radius: 0;
     &::-webkit-input-placeholder {
       color: #6fb4ec;
     }
