@@ -67,4 +67,7 @@ header > h1 {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
+  header h1 {
+    display: none;
+  }
 }

@@ -1,0 +1,47 @@
+@media (min-width: 680px) {
+  .upButton {
+    display: none;
+  }
+  .downButton {
+    display: none;
+  }
+}
+
+@media (max-width: 679px) and (min-width: 481px) {
+  .upButton {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: transparent;
+    z-index: 250;
+    cursor: pointer;
+  }
+  .downButton {
+    display: none;
+  }
+  .icon {
+    color: #0a73ea;
+  }
+}
+
+@media (max-width: 481px) {
+  .downButton {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: transparent;
+    z-index: 250;
+    cursor: pointer;
+  }
+  .upButton {
+    position: fixed;
+    bottom: 50px;
+    right: 15px;
+    background: transparent;
+    z-index: 250;
+    cursor: pointer;
+  }
+  .icon {
+    color: #0a73ea;
+  }
+}

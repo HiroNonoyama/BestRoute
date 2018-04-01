@@ -4,7 +4,7 @@ import { render } from "react-dom";
 import Search from "./Search";
 import Map from "./Map";
 import Result from "./Result";
-import { UpButton } from "../components/UpButton";
+import { MoveButton } from "../components/MoveButton";
 import styles from "../../styles/containers/app.scss";
 import { CONSTANT } from "../constants";
 
@@ -36,6 +36,11 @@ class App extends React.PureComponent {
     document.getElementsByTagName("html")[0].scrollTop = 0;
   };
 
+  goToBottom = () => {
+    document.getElementsByTagName("body")[0].scrollTop = 1000;
+    document.getElementsByTagName("html")[0].scrollTop = 1000;
+  };
+
   render() {
     const { isRightShow, isLeftShow, result } = this.state;
     return (
@@ -57,7 +62,10 @@ class App extends React.PureComponent {
           expand={this.rightExpand}
           shrink={this.rightShrink}
         />
-        <UpButton handleClick={this.goToTop} />
+        <MoveButton
+          handleTopClick={this.goToTop}
+          handleBottomClick={this.goToBottom}
+        />
       </div>
     );
   }
