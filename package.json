@@ -16,7 +16,7 @@
   "scripts": {
     "start": "npx parcel index.html",
     "watch": "npx parcel watch index.html",
-    "build": "npx parcel build index.html --out-dir ./build"
+    "build": "npx parcel build index.html --public-url ."
   },
   "devDependencies": {
     "@types/googlemaps": "^3.30.8",
