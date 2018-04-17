@@ -6,7 +6,14 @@ import Map from "./Map";
 import Result from "./Result";
 import { MoveButton } from "../components/MoveButton";
 import styles from "../../styles/containers/app.scss";
-import { CONSTANT } from "../constants";
+
+let API_KEY;
+if (process.env.NODE_ENV === "production") {
+  API_KEY = process.env.API_KEY;
+} else {
+  const { CONSTANT } = require("../constants");
+  API_KEY = CONSTANT.API_KEY;
+}
 
 class App extends React.PureComponent {
   state = { isLeftShow: true, isRightShow: false, result: {} };
@@ -73,9 +80,7 @@ class App extends React.PureComponent {
 
 const setup = () => {
   const script = document.createElement("script");
-  const URL = `https://maps.googleapis.com/maps/api/js?key=${
-    CONSTANT.API_KEY
-  }&libraries=places,directions`;
+  const URL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places,directions`;
   script.src = URL;
   document.head.appendChild(script);
 
