@@ -1,8 +1,6 @@
 import * as React from "react";
 import * as debounce from "lodash.debounce";
 
-import { API_KEY } from "../constants";
-
 interface WithAutoCompleteState {
   predictions: any;
   isOpen: boolean;
