@@ -111,3 +111,51 @@
     opacity: 0;
   }
 }
+
+.icon {
+  color: white;
+  &:hover {
+    color: #0a73ea;
+    cursor: pointer;
+  }
+}
+
+.selectedIcon {
+  color: #0a73ea;
+}
+
+.travelModeTabsWrap {
+  width: 100%;
+  text-align: center;
+}
+
+.travelModeTab {
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+.selectedButton {
+  background-color: white;
+}
+
+.iconButton {
+  padding: 4px;
+  border: 1px solid white;
+  width: 50px;
+  border-right: none;
+  &:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-left: 12px;
+  }
+  &:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-right: 1px solid white;
+    padding-right: 12px;
+  }
+}

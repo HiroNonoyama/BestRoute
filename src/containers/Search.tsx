@@ -1,7 +1,16 @@
 import * as React from "react";
+import * as FontAwesome from "react-fontawesome";
+import * as classNames from "classnames";
 
 import * as styles from "../../styles/containers/Search.scss";
 import TextInputArea from "./TextInputArea";
+
+enum TravelMode {
+  DRIVING = "DRIVING",
+  // BICYCLING = "BICYCLING",
+  TRANSIT = "TRANSIT",
+  WALKING = "WALKING",
+}
 
 interface Form {
   placeholder: string;
@@ -13,6 +22,7 @@ interface SearchState {
   form: Form[];
   firstForm: Form;
   lastForm: Form;
+  travelMode: TravelMode;
 }
 
 class Search extends React.PureComponent<SearchState> {
@@ -32,6 +42,7 @@ class Search extends React.PureComponent<SearchState> {
       value: "",
       formattedAddress: "",
     },
+    travelMode: TravelMode.DRIVING,
   };
 
   componentDidMount() {
@@ -61,7 +72,7 @@ class Search extends React.PureComponent<SearchState> {
   };
 
   _searchDirection = () => {
-    const { form, firstForm, lastForm } = this.state;
+    const { form, firstForm, lastForm, travelMode } = this.state;
     const waypoints = form
       .filter(({ value }) => value !== "")
       .map(({ value, formattedAddress }) => ({
@@ -80,14 +91,18 @@ class Search extends React.PureComponent<SearchState> {
         ? lastForm.formattedAddress
         : lastForm.value;
 
-      const request = {
+      const request: any = {
         origin,
         destination,
         waypoints,
         provideRouteAlternatives: false,
-        travelMode: "DRIVING",
+        travelMode: travelMode,
         optimizeWaypoints: true,
       };
+
+      if (travelMode === TravelMode.TRANSIT) {
+        request.transitOptions = { modes: ["RAIL"] };
+      }
 
       this.directionsService.route(request, (result, status) => {
         if (status === "OK") {
@@ -216,10 +231,56 @@ class Search extends React.PureComponent<SearchState> {
     }
   };
 
+  _iconName(mode) {
+    switch (mode) {
+      case TravelMode.BICYCLING:
+        return "bicycle";
+      case TravelMode.TRANSIT:
+        return "subway";
+      case TravelMode.WALKING:
+        return "male";
+      case TravelMode.DRIVING:
+      default:
+        return "car";
+    }
+  }
+
+  _handleIconClick = mode => {
+    this.setState({ travelMode: TravelMode[mode] });
+  };
+
   render() {
     const { firstForm, lastForm, form } = this.state;
+    const { travelMode } = this.state;
+
     return (
       <div className={styles.container}>
+        <div className={styles.travelModeTabsWrap}>
+          <div className={styles.travelModeTab}>
+            {Object.keys(TravelMode).map(mode => {
+              const isSelected = TravelMode[mode] === travelMode;
+              return (
+                <div
+                  key={mode}
+                  onClick={() => {
+                    this._handleIconClick(mode);
+                  }}
+                  className={classNames(styles.iconButton, {
+                    [styles.selectedButton]: isSelected,
+                  })}
+                >
+                  <FontAwesome
+                    name={this._iconName(TravelMode[mode])}
+                    size="lg"
+                    className={classNames(styles.icon, {
+                      [styles.selectedIcon]: isSelected,
+                    })}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
         <TextInputArea
           firstForm={firstForm}
           lastForm={lastForm}
