@@ -109,7 +109,6 @@ class Search extends React.PureComponent<SearchState> {
       }
 
       this.directionsService.route(request, (result, status) => {
-        console.log(result);
         if (status === "OK") {
           this._validationLineColorChange();
           this.props.setResult(this._nameModify(result, waypoints));
