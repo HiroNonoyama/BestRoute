@@ -240,8 +240,8 @@ class Search extends React.PureComponent<SearchState> {
 
   _iconName(mode) {
     switch (mode) {
-      case TravelMode.BICYCLING:
-        return "bicycle";
+      // case TravelMode.BICYCLING:
+      //   return "bicycle";
       case TravelMode.TRANSIT:
         return "subway";
       case TravelMode.WALKING:
@@ -253,7 +253,22 @@ class Search extends React.PureComponent<SearchState> {
   }
 
   _handleIconClick = mode => {
-    this.setState({ travelMode: TravelMode[mode] });
+    this.setState({ travelMode: TravelMode[mode] }, () => {
+      const { form, firstForm, lastForm, travelMode } = this.state;
+      const filledFormLength = form.filter(v => v.value !== "").length;
+      const isFirstFilled = firstForm.value !== "";
+      const isLastFilled = lastForm.value !== "";
+
+      if (
+        !isFirstFilled ||
+        !isLastFilled ||
+        ([TravelMode.DRIVING, TravelMode.WALKING].includes(travelMode) &&
+          filledFormLength === 0)
+      ) {
+        return;
+      }
+      this._searchDirection();
+    });
   };
 
   render() {
