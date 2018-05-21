@@ -5,7 +5,7 @@ import * as classNames from "classnames";
 import * as styles from "../../styles/containers/Search.scss";
 import TextInputArea from "./TextInputArea";
 
-enum TravelMode {
+export enum TravelMode {
   DRIVING = "DRIVING",
   // BICYCLING = "BICYCLING",
   TRANSIT = "TRANSIT",
@@ -60,7 +60,7 @@ class Search extends React.PureComponent<SearchState> {
   }
 
   _handleAddButton = () => {
-    const { form } = this.state;
+    const { form, travelMode } = this.state;
     this.setState({
       form: [...form, { placeholder: "", value: "", formattedAddress: "" }],
     });
@@ -82,7 +82,7 @@ class Search extends React.PureComponent<SearchState> {
     if (
       firstForm.value !== "" &&
       lastForm.value !== "" &&
-      waypoints.length > 0
+      (waypoints.length > 0 || travelMode === TravelMode.TRANSIT)
     ) {
       const origin = firstForm.formattedAddress
         ? firstForm.formattedAddress
@@ -101,10 +101,15 @@ class Search extends React.PureComponent<SearchState> {
       };
 
       if (travelMode === TravelMode.TRANSIT) {
-        request.transitOptions = { modes: ["RAIL"] };
+        request.transitOptions = {
+          modes: ["RAIL"],
+          departureTime: new Date(),
+        };
+        request.waypoints = [];
       }
 
       this.directionsService.route(request, (result, status) => {
+        console.log(result);
         if (status === "OK") {
           this._validationLineColorChange();
           this.props.setResult(this._nameModify(result, waypoints));
@@ -197,11 +202,14 @@ class Search extends React.PureComponent<SearchState> {
   }
 
   _handleSearchPress = () => {
-    const { form, firstForm, lastForm } = this.state;
+    const { form, firstForm, lastForm, travelMode } = this.state;
     const filledFormLength = form.filter(v => v.value !== "").length;
     const isFirstFilled = firstForm.value !== "";
     const isLastFilled = lastForm.value !== "";
-    if (filledFormLength > 0 && isFirstFilled && isLastFilled) {
+    if (
+      travelMode === TravelMode.TRANSIT ||
+      (filledFormLength > 0 && isFirstFilled && isLastFilled)
+    ) {
       this._searchDirection();
     } else {
       alert("START, GOAL, また、VIAを一つ以上入力してください");
@@ -290,6 +298,7 @@ class Search extends React.PureComponent<SearchState> {
           handleInput={this._handleInput}
           handleSearchPress={this._handleSearchPress}
           handleAddButton={this._handleAddButton}
+          selected={travelMode}
         />
       </div>
     );

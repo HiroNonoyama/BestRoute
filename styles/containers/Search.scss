@@ -116,7 +116,6 @@
   color: white;
   &:hover {
     color: #0a73ea;
-    cursor: pointer;
   }
 }
 
@@ -143,10 +142,13 @@
 }
 
 .iconButton {
-  padding: 4px;
+  padding: 3px;
   border: 1px solid white;
   width: 50px;
   border-right: none;
+  &:hover {
+    cursor: pointer;
+  }
   &:first-child {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;

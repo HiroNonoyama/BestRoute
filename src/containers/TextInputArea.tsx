@@ -4,6 +4,7 @@ import * as FontAwesome from "react-fontawesome";
 
 import * as styles from "../../styles/containers/TextInputArea.scss";
 import TextInputWithAutoComplete from "../components/TextInput";
+import { TravelMode } from "./Search";
 
 interface Form {
   placeholder: string;
@@ -20,6 +21,7 @@ interface TextInputProps {
   handleInput: (key1: string, key2: string, key3: number) => void;
   handleSearchPress;
   handleAddButton;
+  selected: TravelMode;
 }
 
 export default function TextInputArea({
@@ -31,6 +33,7 @@ export default function TextInputArea({
   handleInput,
   handleSearchPress,
   handleAddButton,
+  selected,
 }: TextInputProps) {
   const _pressRemoveButton = (index, random) => {
     const target = document.querySelector(`div[data-index="${random}"]`)
@@ -50,42 +53,45 @@ export default function TextInputArea({
           handleEnter={searchDirection}
         />
       </div>
-      {form.map(({ placeholder, value }, index) => {
-        const random = Math.random();
-        return (
-          <div
-            className={classNames(styles.wrap, styles.fadein)}
-            key={index}
-            data-index={random}
-          >
-            {form.length > 1 && (
-              <a
-                className={styles.removeButton}
-                onClick={() => _pressRemoveButton(index, random)}
-              >
-                <FontAwesome name="times-circle" size="lg" />
-              </a>
-            )}
-            <TextInputWithAutoComplete
-              placeholder={placeholder}
-              label={`VIA${index + 1}`}
-              value={value}
-              handleInput={e => handleInput(e.value, e.formattedAddress, index)}
-              handleEnter={searchDirection}
-            />
-            {index === form.length - 1 && (
-              <button
-                className={styles.addButton}
-                onClick={handleAddButton}
-                id="addButton"
-                type="button"
-              >
-                <FontAwesome name="plus-circle" size="2x" />
-              </button>
-            )}
-          </div>
-        );
-      })}
+      {selected !== TravelMode.TRANSIT &&
+        form.map(({ placeholder, value }, index) => {
+          const random = Math.random();
+          return (
+            <div
+              className={classNames(styles.wrap, styles.fadein)}
+              key={index}
+              data-index={random}
+            >
+              {form.length > 1 && (
+                <a
+                  className={styles.removeButton}
+                  onClick={() => _pressRemoveButton(index, random)}
+                >
+                  <FontAwesome name="times-circle" size="lg" />
+                </a>
+              )}
+              <TextInputWithAutoComplete
+                placeholder={placeholder}
+                label={`VIA${index + 1}`}
+                value={value}
+                handleInput={e =>
+                  handleInput(e.value, e.formattedAddress, index)
+                }
+                handleEnter={searchDirection}
+              />
+              {index === form.length - 1 && (
+                <button
+                  className={styles.addButton}
+                  onClick={handleAddButton}
+                  id="addButton"
+                  type="button"
+                >
+                  <FontAwesome name="plus-circle" size="2x" />
+                </button>
+              )}
+            </div>
+          );
+        })}
       <div className={classNames(styles.wrap, styles.fadein)}>
         <TextInputWithAutoComplete
           placeholder={lastForm.placeholder}
