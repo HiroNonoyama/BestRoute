@@ -12,6 +12,8 @@ interface MapProps {
 }
 
 class Map extends React.PureComponent<MapProps> {
+  private ref: HTMLElement;
+
   componentWillReceiveProps(nextProps) {
     const { isLeftShow, isRightShow } = this.props;
     const [nextLeftShow, nextRightShow] = [
