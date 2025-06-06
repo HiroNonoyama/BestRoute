@@ -34,5 +34,3 @@ jobs:
         uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          allowed_tools: "mcp__github__add_pull_request_review_comment"
-
